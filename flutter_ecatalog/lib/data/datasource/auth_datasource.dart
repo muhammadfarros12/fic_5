@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_ecatalog/data/model/request/register_request_model.dart';
 import 'package:flutter_ecatalog/data/model/response/register_response_model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthDatasource {
   Future<Either<String, RegisterResponseModel>> register(
-      RegisterResponseModel model) async {
+      RegisterRequestModel model) async {
     final response = await http.post(
         Uri.parse('https://api.escuelajs.co/api/v1/users/'),
         body: model.toJson(),
