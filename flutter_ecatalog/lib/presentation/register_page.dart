@@ -107,17 +107,19 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                       child: const Text('Register'));
                 },
-
               ),
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(
+              height: 16,
+            ),
             InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (_){
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
                   return const LoginPage();
                 }));
               },
-              child: const Text('Sudah punya akun? Login'))
+              child: const Text('Sudah punya akun? Login'),
+            )
           ],
         ),
       ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecatalog/bloc/login/login_bloc.dart';
+import 'package:flutter_ecatalog/data/datasource/local_datasource.dart';
 import 'package:flutter_ecatalog/data/model/request/login_request_model.dart';
 import 'package:flutter_ecatalog/presentation/home_page.dart';
+import 'package:flutter_ecatalog/presentation/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,9 +19,20 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
+    checkAuth();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     super.initState();
+  }
+
+  Future<void> checkAuth() async {
+    await Future.delayed(const Duration(seconds: 1));
+    final auth = await LocalDataSource().getToken();
+    if (auth.isNotEmpty) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) {
+        return const HomePage();
+      }));
+    }
   }
 
   @override
@@ -83,6 +96,8 @@ class _LoginPageState extends State<LoginPage> {
                 ));
               }
               if (state is LoginLoaded) {
+                LocalDataSource()
+                    .saveToken(state.loginResponseModel.accessToken);
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('Login Success'),
                   backgroundColor: Colors.green,
@@ -95,6 +110,17 @@ class _LoginPageState extends State<LoginPage> {
                 );
               }
             }),
+            const SizedBox(
+              height: 16,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return const RegisterPage();
+                }));
+              },
+              child: const Text('Belum punya akun? Register'),
+            )
           ],
         ),
       ),

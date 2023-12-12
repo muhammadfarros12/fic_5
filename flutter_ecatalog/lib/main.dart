@@ -4,6 +4,7 @@ import 'package:flutter_ecatalog/bloc/login/login_bloc.dart';
 import 'package:flutter_ecatalog/data/datasource/auth_datasource.dart';
 
 import 'bloc/register/register_bloc.dart';
+import 'presentation/login_page.dart';
 import 'presentation/register_page.dart';
 
 void main() {
@@ -31,8 +32,8 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const RegisterPage(),
-        // home: const LoginPage(),
+        // home: const RegisterPage(),
+        home: const LoginPage(),
       ),
     );
   }
