@@ -69,7 +69,7 @@ class Category {
 
     factory Category.fromMap(Map<String, dynamic> json) => Category(
         id: json["id"],
-        name: nameValues.map[json["name"]]!,
+        name: nameValues.map[json["name"]],
         image: json["image"],
         creationAt: json["creationAt"] == null ? null : DateTime.parse(json["creationAt"]),
         updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
