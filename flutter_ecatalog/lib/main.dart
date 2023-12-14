@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecatalog/bloc/add_product/add_product_bloc.dart';
 import 'package:flutter_ecatalog/bloc/login/login_bloc.dart';
 import 'package:flutter_ecatalog/bloc/products/products_bloc.dart';
 import 'package:flutter_ecatalog/data/datasource/auth_datasource.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ProductsBloc(ProductDataSource()),
+        ),
+        BlocProvider(
+          create: (context) => AddProductBloc(ProductDataSource()),
         ),
       ],
       child: MaterialApp(

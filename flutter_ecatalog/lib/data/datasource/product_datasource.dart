@@ -4,6 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_ecatalog/data/model/response/product_response_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/request/product_request_model.dart';
+
 class ProductDataSource {
   Future<Either<String, List<ProductResponseModel>>> getAllProduct() async {
     final response =
@@ -13,6 +15,18 @@ class ProductDataSource {
           .map((x) => ProductResponseModel.fromMap(x))));
     } else {
       return left('get product error');
+    }
+  }
+
+  Future<Either<String, ProductResponseModel>> createProduct(ProductRequestModel model) async{
+    final response = await http.post(
+    Uri.parse('https://api.escuelajs.co/api/v1/products/'),
+    body: model.toJson(),
+    headers: {'Content-Type': 'application/json'});
+    if (response.statusCode == 201) {
+      return Right(ProductResponseModel.fromJson(response.body));
+    } else {
+      return Left('Error get product');
     }
   }
 }
