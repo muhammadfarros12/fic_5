@@ -8,9 +8,17 @@ final class ProductsInitial extends ProductsState {}
 final class ProductLoading extends ProductsState {}
 
 final class ProductsLoaded extends ProductsState {
+  final int offset;
+  final int limit;
+  final bool isNext;
   final List<ProductResponseModel> model;
 
-  ProductsLoaded({required this.model});
+  ProductsLoaded({
+    required this.model,
+    this.offset = 0,
+    this.limit = 10,
+    this.isNext = false,
+    });
 
 }
 
